@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Avion {
 	private static int codigo=0;
@@ -8,6 +9,23 @@ public class Avion {
 	public Avion() {
 		Avion.codigo++;
 		this.nombre= Avion.codigo;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(llegada, origen);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Avion other = (Avion) obj;
+		return llegada == other.llegada && nombre == other.nombre && origen == other.origen;
 	}
 
 	public int getNombre() {
