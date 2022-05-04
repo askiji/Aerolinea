@@ -4,13 +4,16 @@ import java.util.Random;
 
 public class Vuelo {
 
-	private static HashSet<Vuelo> tiempoDeVuelo;
+	public static HashSet<Vuelo> tiempoDeVuelo;
 	private static int numVuelo=0;
+	public String tiempoVuelo;
 
-//	private static Vuelo[] vuelos = new Vuelo[4];
-//	private String aux;
-	private Avion autobusConAlas;
-	private String mitad;
+
+	public Avion autobusConAlas;
+	public Vuelo(Avion autobusConAlas) {
+		Vuelo.numVuelo++;
+		this.autobusConAlas = autobusConAlas;
+	}
 	@Override
 	public int hashCode() {
 		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;
@@ -23,8 +26,9 @@ public class Vuelo {
 		return aux;
 	}
 	
-	public void getCode() {
+	public String getCode() {
 		String fin = autobusConAlas.getNombre()+""+getMitad()+Vuelo.numVuelo;
+		return fin;
 	}
 	public void setAvion(Avion av) {
 		this.autobusConAlas=av;

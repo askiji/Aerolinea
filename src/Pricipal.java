@@ -25,13 +25,19 @@ public class Pricipal {
 		altos.init();
 		altos.llenarCiudades();
 		altos.buscarDestino();
+		altos.generarVuelo();
+		altos.pantalla();
+		altos.setOrigen();
+		System.out.println(altos.flota.size());
+		for (Avion a :altos.flota) {
+			System.out.println(a.getLlegada());
+		}
 		altos.llenarCiudades();
 		altos.buscarDestino();
 		System.out.println(altos.flota.size());
 		for (Avion a :altos.flota) {
 			System.out.println(a.getLlegada());
 		}
-		System.out.println("asdasd");
 //		System.out.println(AgenciaAerea.city);
 		
 	}

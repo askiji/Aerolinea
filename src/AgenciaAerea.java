@@ -5,6 +5,7 @@ public class AgenciaAerea {
 
 	public ArrayList<Avion> flota = new ArrayList<>();
 	private static ArrayList<Ciudades> city = new ArrayList<>();
+	private ArrayList<Vuelo> vuelosDia = new ArrayList<>();
 
 	public void init() {
 		Avion a1=new Avion();
@@ -23,9 +24,7 @@ public class AgenciaAerea {
 		
 		for (Avion av : flota) {
 			int num = r.nextInt(city.size());
-			System.out.println(num);
 			if(av.getOrigen().equals(city.get(num))) {
-				System.out.println("asdasd");
 				if(num==0) {
 					num++;
 				}
@@ -33,19 +32,38 @@ public class AgenciaAerea {
 					num--;
 				}
 			}
-			
 			av.setLlegada(city.get(num));
-//			System.out.println(av.getNombre());
 			city.remove(num);
+		}
+	}
+	
+	public void setOrigen() {
+		for (Avion av : flota) {
+			av.setOrigen(av.getLlegada());
 		}
 	}
 	public void llenarCiudades() {
 		city.clear();
 		for (Ciudades a : Ciudades.values()) {
 			city.add(a);
-//			System.out.println(a.getCorto());
+		}
+	}
+	public void generarVuelo() {
+		vuelosDia.clear();
+		for (Avion av : flota) {
+			Vuelo  v = new Vuelo(av); 
+			if( Vuelo.tiempoDeVuelo!=null && Vuelo.tiempoDeVuelo.contains(v)) {
+				System.out.println("entra en que lo tiene");
+			}
+			vuelosDia.add(v);
+			Vuelo.tiempoDeVuelo.add(v);
 		}
 	}
 	
+	public void pantalla() {
+		for (Vuelo v : vuelosDia) {
+			System.out.println(v.getCode()+ v.autobusConAlas.getOrigen().nombre+v.autobusConAlas.getLlegada().nombre);
+		}
+	}
 	
 }
