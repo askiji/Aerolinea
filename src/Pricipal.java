@@ -34,6 +34,7 @@ public class Pricipal {
 		}
 		altos.llenarCiudades();
 		altos.buscarDestino();
+		altos.pantalla();
 		System.out.println(altos.flota.size());
 		for (Avion a :altos.flota) {
 			System.out.println(a.getLlegada());

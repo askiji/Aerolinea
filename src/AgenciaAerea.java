@@ -52,17 +52,16 @@ public class AgenciaAerea {
 		vuelosDia.clear();
 		for (Avion av : flota) {
 			Vuelo  v = new Vuelo(av); 
+			vuelosDia.add(v);
 			if( Vuelo.tiempoDeVuelo!=null && Vuelo.tiempoDeVuelo.contains(v)) {
 				System.out.println("entra en que lo tiene");
 			}
-			vuelosDia.add(v);
-			Vuelo.tiempoDeVuelo.add(v);
 		}
 	}
 	
 	public void pantalla() {
 		for (Vuelo v : vuelosDia) {
-			System.out.println(v.getCode()+ v.autobusConAlas.getOrigen().nombre+v.autobusConAlas.getLlegada().nombre);
+			System.out.println(v.getCode()+ " " +v.autobusConAlas.getOrigen().nombre+"-"+v.autobusConAlas.getLlegada().nombre);
 		}
 	}
 	

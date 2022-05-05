@@ -6,12 +6,14 @@ public class Vuelo {
 
 	public static HashSet<Vuelo> tiempoDeVuelo;
 	private static int numVuelo=0;
+	private int vuelo;
 	public String tiempoVuelo;
 
 
 	public Avion autobusConAlas;
 	public Vuelo(Avion autobusConAlas) {
-		Vuelo.numVuelo++;
+//		Vuelo.numVuelo++;
+		this.vuelo = Vuelo.numVuelo;
 		this.autobusConAlas = autobusConAlas;
 	}
 	@Override
@@ -27,6 +29,7 @@ public class Vuelo {
 	}
 	
 	public String getCode() {
+		Vuelo.numVuelo++;
 		String fin = autobusConAlas.getNombre()+""+getMitad()+Vuelo.numVuelo;
 		return fin;
 	}
