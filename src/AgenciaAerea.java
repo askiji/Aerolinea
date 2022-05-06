@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -6,6 +9,10 @@ public class AgenciaAerea {
 	public ArrayList<Avion> flota = new ArrayList<>();
 	private static ArrayList<Ciudades> city = new ArrayList<>();
 	private ArrayList<Vuelo> vuelosDia = new ArrayList<>();
+	private DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
+	
+	private LocalDate ldt = LocalDate.now();
+	
 
 	public void init() {
 		Avion a1=new Avion();
@@ -16,6 +23,8 @@ public class AgenciaAerea {
 		flota.add(a2);
 		flota.add(a3);
 		flota.add(a4);
+		
+	
 	}
 	
 	
@@ -53,15 +62,26 @@ public class AgenciaAerea {
 		for (Avion av : flota) {
 			Vuelo  v = new Vuelo(av); 
 			vuelosDia.add(v);
+			
 			if( Vuelo.tiempoDeVuelo!=null && Vuelo.tiempoDeVuelo.contains(v)) {
 				System.out.println("entra en que lo tiene");
 			}
 		}
 	}
 	
+	public LocalTime horaSalida() {
+		Random r = new Random();
+		int hora = r.nextInt(16)+7;
+		int minutos = r.nextInt(12)*5;
+		LocalTime lt=LocalTime.of(hora, minutos);
+		return lt;
+	}
+	
 	public void pantalla() {
+		System.out.println("Vuelos "+ldt.format(formatters) + "\t        Hora de salida \n");
 		for (Vuelo v : vuelosDia) {
-			System.out.println(v.getCode()+ " " +v.autobusConAlas.getOrigen().nombre+"-"+v.autobusConAlas.getLlegada().nombre);
+			LocalTime lt = horaSalida();
+			System.out.println(v.getCode()+ " " +v.autobusConAlas.getOrigen().nombre+"-"+v.autobusConAlas.getLlegada().nombre+"\t \t" +lt);
 		}
 	}
 	

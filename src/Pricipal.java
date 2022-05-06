@@ -28,19 +28,15 @@ public class Pricipal {
 		altos.generarVuelo();
 		altos.pantalla();
 		altos.setOrigen();
-		System.out.println(altos.flota.size());
-		for (Avion a :altos.flota) {
-			System.out.println(a.getLlegada());
-		}
+		
+		System.out.println("next ");
+		
 		altos.llenarCiudades();
 		altos.buscarDestino();
+		altos.generarVuelo();
 		altos.pantalla();
-		System.out.println(altos.flota.size());
-		for (Avion a :altos.flota) {
-			System.out.println(a.getLlegada());
-		}
-//		System.out.println(AgenciaAerea.city);
-		
+		altos.setOrigen();
+
 	}
 	
 

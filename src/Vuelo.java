@@ -1,18 +1,17 @@
-import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.HashSet;
-import java.util.Random;
 
 public class Vuelo {
 
 	public static HashSet<Vuelo> tiempoDeVuelo;
 	private static int numVuelo=0;
 	private int vuelo;
-	public String tiempoVuelo;
+	public LocalTime tiempoVuelo;
 
 
 	public Avion autobusConAlas;
 	public Vuelo(Avion autobusConAlas) {
-//		Vuelo.numVuelo++;
+		Vuelo.numVuelo++;
 		this.vuelo = Vuelo.numVuelo;
 		this.autobusConAlas = autobusConAlas;
 	}
@@ -29,8 +28,8 @@ public class Vuelo {
 	}
 	
 	public String getCode() {
-		Vuelo.numVuelo++;
-		String fin = autobusConAlas.getNombre()+""+getMitad()+Vuelo.numVuelo;
+//		Vuelo.numVuelo++;
+		String fin = autobusConAlas.getNombre()+""+getMitad()+this.vuelo;
 		return fin;
 	}
 	public void setAvion(Avion av) {
