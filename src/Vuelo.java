@@ -1,26 +1,63 @@
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Vuelo {
 
-	public static HashSet<Vuelo> tiempoDeVuelo;
+	
 	private static int numVuelo=0;
 	private int vuelo;
 	public LocalTime tiempoVuelo;
-
-
 	public Avion autobusConAlas;
+	public LocalTime salida;
+	public LocalTime llegada;
+	
 	public Vuelo(Avion autobusConAlas) {
 		Vuelo.numVuelo++;
 		this.vuelo = Vuelo.numVuelo;
 		this.autobusConAlas = autobusConAlas;
 	}
+	
+	public static int getNumVuelo() {
+		return numVuelo;
+	}
+
+	public static void setNumVuelo(int numVuelo) {
+		Vuelo.numVuelo = numVuelo;
+	}
+
+	public int getVuelo() {
+		return vuelo;
+	}
+
+	public void setVuelo(int vuelo) {
+		this.vuelo = vuelo;
+	}
+
+	public LocalTime getTiempoVuelo() {
+		return tiempoVuelo;
+	}
+
+	public void setTiempoVuelo(LocalTime tiempoVuelo) {
+		this.tiempoVuelo = tiempoVuelo;
+	}
+
+	public Avion getAutobusConAlas() {
+		return autobusConAlas;
+	}
+
+	public void setAutobusConAlas(Avion autobusConAlas) {
+		this.autobusConAlas = autobusConAlas;
+	}
+//	public int a() {
+//		return Objects.hash(autobusConAlas.getOrigen().corto, autobusConAlas.getLlegada().corto);
+//	}
+//	public int b() {
+//		return Objects.hash(autobusConAlas.getLlegada().corto,autobusConAlas.getOrigen().corto);
+//	}
 	@Override
 	public int hashCode() {
-		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;
-		
-		int def = Integer.valueOf(aux);
-		return def;
+		return Objects.hash(autobusConAlas.getOrigen().corto, autobusConAlas.getLlegada().corto);
 	}
 	private String getMitad() {
 		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;
@@ -35,37 +72,23 @@ public class Vuelo {
 	public void setAvion(Avion av) {
 		this.autobusConAlas=av;
 	}
-	
-	
-	
-	
 
-//	public Ciudades hacerVuelo() {
+	public LocalTime getSalida() {
+		return salida;
+	}
+
+	public void setSalida(LocalTime salida) {
+		this.salida = salida;
+	}
+
+	public LocalTime getLlegada() {
+		return llegada;
+	}
+
+	public void setLlegada(LocalTime llegada) {
+		this.llegada = llegada;
+	}
 
 
-//		return (Ciudades)city.get(num);
-//	}
-//	private static void generarVuelosDelDia() {
-//		for (Vuelo v : vuelos) {
-//			hacerVuelo();
-//		}
-//	}
-//	
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Vuelo other = (Vuelo) obj;
-//		return Objects.equals(autobusConAlas, other.autobusConAlas);
-//	}
-//	
-//	
-	
-	
-	
 	
 }
