@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,7 +16,8 @@ public class AgenciaAerea {
 	public static HashSet<Vuelo> tiempoDeVuelo= new HashSet<Vuelo>();
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm");
 	private ArrayList<Vuelo> allFlights = new ArrayList<>();
-	
+	private ArrayList<String> chorizo = new ArrayList<String>();
+	private HashMap<Integer , LocalTime> duraciones = new HashMap<>();
 	private LocalDate ldt;
 	
 
@@ -44,6 +45,7 @@ public class AgenciaAerea {
 		switch (opcion) {
 		case 1:
 			System.out.println("to do");
+			acumulados();
 			break;
 		case 2:
 			ldt=ldt.plusDays(1);
@@ -66,42 +68,55 @@ public class AgenciaAerea {
 		
 	}
 	
+	private void acumulados() {
+		System.out.println("Vuelos "+ldt.format(formatters) + "\t        Hora de salida \t  Hora de llegada");
+		
+		for (String palabras : chorizo) {
+			System.out.println(palabras);
+		}
+		
+	}
+	
 	public void tiemposDeVuelo() {
+		
 		Scanner sc = new Scanner(System.in);
-		LocalTime cerocero = LocalTime.of(0, 0);
+		String frase = "Duracion del vulo del avion ";
 		LocalTime siete = LocalTime.of(7, 0);
-		for (Vuelo v : vuelosDia) {
-			for (Vuelo vueloGuardado : tiempoDeVuelo) {
-				if (v.hashCode() == vueloGuardado.hashCode() && vueloGuardado.tiempoVuelo == null) {
-					System.out.println("Duracion del vuelo en minutos avion " + v.getAutobusConAlas().getNombre() +" : " + v.autobusConAlas.getOrigen().nombre +" - "
-							+ v.autobusConAlas.getLlegada().nombre+ "?");
-					int minutos = sc.nextInt();
-					LocalTime aux = cerocero;
-					aux = aux.plusMinutes(minutos);
-					v.setTiempoVuelo(aux);
-					vueloGuardado.setTiempoVuelo(aux);
-					LocalTime auxTime = v.getSalida().plusMinutes(minutos);
-					v.setLlegada(auxTime);
-					String llegada = "Hora de llegada " + v.getLlegada();
-					if(v.getLlegada().isBefore(siete)) {
-						llegada += " del dia siguente";
-					}
-//					System.out.println(v.a());
-//					System.out.println(v.b());
-					System.out.println(llegada);
-					
-					break;
+		for (Vuelo vueloDia : vuelosDia) {
+			if(duraciones.get(vueloDia.customHashCode()) != null) {
+				vueloDia.setTiempoVuelo(duraciones.get(vueloDia.getCode()));
+				LocalTime t1 = vueloDia.salida;  // 09:00
+				LocalTime t2 = duraciones.get(vueloDia.customHashCode()); // 02:30
+				LocalTime total = t1.plusHours(t2.getHour())
+				                    .plusMinutes(t2.getMinute());
+				vueloDia.setLlegada(total);
+				System.out.println(frase + " : "+ vueloDia.getAutobusConAlas().getOrigen().nombre+" - "+vueloDia.getAutobusConAlas().getLlegada().nombre );
+				System.out.println("Es de "+ duraciones.get(vueloDia.customHashCode()));
+				System.out.println("hora de llegada" + vueloDia.getLlegada());
+				if(vueloDia.getLlegada().isBefore(siete)) {
+					System.out.println("Del dia siguente");
 				}
-//				(v.hashCode() == vueloGuardado.hashCode() && vueloGuardado.tiempoVuelo != null)
-				if (v.hashCode() == vueloGuardado.hashCode() && vueloGuardado.tiempoVuelo != null){
-					System.out.println("*** Duracion del vuelo en minutos avion " + v.getAutobusConAlas().getNombre() +" : " + v.autobusConAlas.getOrigen().nombre +" - "
-							+ v.autobusConAlas.getLlegada().nombre+ "?");
-					System.out.println("La duracion del vuelo es " + vueloGuardado.getTiempoVuelo());
-					v.setLlegada(v.getSalida().plusMinutes(ChronoUnit.MINUTES.between(cerocero,vueloGuardado.getTiempoVuelo())));
-					vueloGuardado.getTiempoVuelo();
-				}
-				allFlights.add(v);
+
 			}
+			else {
+				System.out.println(frase+ " : "+ vueloDia.getAutobusConAlas().getOrigen().nombre+" - "+vueloDia.getAutobusConAlas().getLlegada().nombre);
+				int aux = sc.nextInt();
+				LocalTime cero = LocalTime.of(0, 0);
+				cero = cero.plusMinutes(aux);
+				duraciones.put(vueloDia.customHashCode(), cero);
+				vueloDia.setLlegada(vueloDia.salida.plusMinutes(aux));
+				System.out.println("hora de llegada" + vueloDia.getLlegada());
+				if(vueloDia.getLlegada().isBefore(siete)) {
+					System.out.println("Del dia siguente");
+				}
+				System.out.println("salida "+ vueloDia.autobusConAlas.getOrigen());
+				System.out.println("llegada "+ vueloDia.autobusConAlas.getLlegada());
+//				
+//				vueloDia.autobusConAlas.setLlegada(vueloDia.autobusConAlas.getLlegada());
+			}
+				chorizo.add(vueloDia.getCode()+ " " +vueloDia.autobusConAlas.getOrigen().nombre+"-"+vueloDia.autobusConAlas.getLlegada().nombre+"\t \t" +vueloDia.getSalida()+ "\t"+vueloDia.getLlegada());
+				allFlights.add(vueloDia);
+
 		}
 	}
 	

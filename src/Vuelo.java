@@ -2,7 +2,7 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Vuelo {
+public class Vuelo implements Cloneable {
 
 	
 	private static int numVuelo=0;
@@ -11,6 +11,12 @@ public class Vuelo {
 	public Avion autobusConAlas;
 	public LocalTime salida;
 	public LocalTime llegada;
+	
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 	
 	public Vuelo(Avion autobusConAlas) {
 		Vuelo.numVuelo++;
@@ -55,8 +61,8 @@ public class Vuelo {
 //	public int b() {
 //		return Objects.hash(autobusConAlas.getLlegada().corto,autobusConAlas.getOrigen().corto);
 //	}
-	@Override
-	public int hashCode() {
+	
+	public int customHashCode() {
 		return Objects.hash(autobusConAlas.getOrigen().corto, autobusConAlas.getLlegada().corto);
 	}
 	private String getMitad() {
@@ -89,6 +95,10 @@ public class Vuelo {
 		this.llegada = llegada;
 	}
 
-
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
