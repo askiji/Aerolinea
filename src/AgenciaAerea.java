@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -123,8 +124,13 @@ public class AgenciaAerea {
 	
 	public void buscarDestino() {
 		Random r = new Random();
-		
+		LocalDate champions = LocalDate.of(2022, 5, 28);
 		for (Avion av : flota) {
+			if(ldt.isEqual(champions)){
+				av.setLlegada(Ciudades.PARIS);
+			}
+			else {
+				
 			int num = r.nextInt(city.size());
 			if(av.getOrigen().equals(city.get(num))) {
 				if(num==0) {
@@ -136,6 +142,7 @@ public class AgenciaAerea {
 			}
 			av.setLlegada(city.get(num));
 			city.remove(num);
+			}
 		}
 	}
 	
