@@ -1,47 +1,51 @@
+<<<<<<< HEAD
 import java.util.Scanner;
+=======
+import java.util.HashSet;
+>>>>>>> branch 'master' of https://github.com/askiji/Aerolinea.git
 
 public class Pricipal {
 
 	public static void main(String[] args) {
-
-//		Ciudades x = Ciudades.MADRID;
-//		System.out.println(x.corto);
-
 		
-		
-////		System.out.println(a4.ge);
-//		ArrayList<Enum> city = new ArrayList<>();
-//		for (Ciudades a : Ciudades.values()) {
-//			city.add(a);
+//		HashSet<String> hasS= new HashSet<String>();
+//		String s1 = "patata";
+//		String s2 = "limon";
+//		String s3 = "patata";
+//		hasS.add(s1);
+//		hasS.add(s2);
+//		hasS.add(s3);
+//		System.out.println(s1.hashCode());
+//		System.out.println(s3.hashCode());
+//		System.out.println(hasS.contains(s3));
+//		for (String string : hasS) {
+//			System.out.println(string);
 //		}
-//		city.remove(2);
-//		for (Enum enum1 : city) {
-//			System.out.println(enum1);
-//		}
-		AgenciaAerea altos = new AgenciaAerea();
+
 		
-//		altos.horaLlegada();
+		altos.horaLlegada();
 		
 		int aux = 1;
-		altos.init();
-		while(aux<10) {
-			altos.llenarCiudades();
-			altos.buscarDestino();
-			altos.generarVuelo();
-			altos.pantalla();
-			altos.setOrigen();
-			aux++;
 
-		}
+		altos.init();
+
+		
+		
+		while(true)altos.info();
 //		
-		
-		System.out.println("next ");
-		
-		altos.llenarCiudades();
-		altos.buscarDestino();
-		altos.generarVuelo();
-		altos.pantalla();
-		altos.setOrigen();
+//		altos.llenarCiudades();
+//		altos.buscarDestino();
+//		altos.generarVuelo();
+//		altos.pantalla();
+//		altos.setOrigen();
+//		
+//		System.out.println("next \n");
+//		
+//		altos.llenarCiudades();
+//		altos.buscarDestino();
+//		altos.generarVuelo();
+//		altos.pantalla();
+//		altos.setOrigen();
 
 	}
 	
