@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Pricipal {
 
@@ -20,14 +20,20 @@ public class Pricipal {
 //		}
 		AgenciaAerea altos = new AgenciaAerea();
 		
+//		altos.horaLlegada();
 		
-		
+		int aux = 1;
 		altos.init();
-		altos.llenarCiudades();
-		altos.buscarDestino();
-		altos.generarVuelo();
-		altos.pantalla();
-		altos.setOrigen();
+		while(aux<10) {
+			altos.llenarCiudades();
+			altos.buscarDestino();
+			altos.generarVuelo();
+			altos.pantalla();
+			altos.setOrigen();
+			aux++;
+
+		}
+//		
 		
 		System.out.println("next ");
 		

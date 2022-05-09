@@ -3,7 +3,7 @@ import java.util.HashSet;
 
 public class Vuelo {
 
-	public static HashSet<Vuelo> tiempoDeVuelo;
+	
 	private static int numVuelo=0;
 	private int vuelo;
 	public LocalTime tiempoVuelo;
@@ -15,6 +15,7 @@ public class Vuelo {
 		this.vuelo = Vuelo.numVuelo;
 		this.autobusConAlas = autobusConAlas;
 	}
+	
 	@Override
 	public int hashCode() {
 		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;

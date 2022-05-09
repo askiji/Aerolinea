@@ -10,7 +10,7 @@ public class AgenciaAerea {
 	private static ArrayList<Ciudades> city = new ArrayList<>();
 	private ArrayList<Vuelo> vuelosDia = new ArrayList<>();
 	private DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
-	
+//	public static HashMap<Vuelo , Integer> tiempoDeVuelo= new HashMap<>();
 	private LocalDate ldt = LocalDate.now();
 	
 
@@ -47,6 +47,7 @@ public class AgenciaAerea {
 	}
 	
 	public void setOrigen() {
+
 		for (Avion av : flota) {
 			av.setOrigen(av.getLlegada());
 		}
@@ -63,9 +64,9 @@ public class AgenciaAerea {
 			Vuelo  v = new Vuelo(av); 
 			vuelosDia.add(v);
 			
-			if( Vuelo.tiempoDeVuelo!=null && Vuelo.tiempoDeVuelo.contains(v)) {
-				System.out.println("entra en que lo tiene");
-			}
+			
+			
+
 		}
 	}
 	
@@ -84,5 +85,14 @@ public class AgenciaAerea {
 			System.out.println(v.getCode()+ " " +v.autobusConAlas.getOrigen().nombre+"-"+v.autobusConAlas.getLlegada().nombre+"\t \t" +lt);
 		}
 	}
+	
+//	public void horaLlegada() {
+//		Scanner sc = new Scanner(System.in);
+//		for (Vuelo v : vuelosDia) {
+//			if (AgenciaAerea.tiempoDeVuelo.containsKey(v.hashCode())) {
+//				System.out.println("horallegada");
+//			}
+//		}
+//	}
 	
 }
