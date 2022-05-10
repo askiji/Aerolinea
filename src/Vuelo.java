@@ -24,14 +24,7 @@ public class Vuelo implements Cloneable {
 		this.autobusConAlas = autobusConAlas;
 	}
 	
-<<<<<<< HEAD
-	@Override
-	public int hashCode() {
-		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;
-		
-		int def = Integer.valueOf(aux);
-		return def;
-=======
+
 	public static int getNumVuelo() {
 		return numVuelo;
 	}
@@ -72,7 +65,6 @@ public class Vuelo implements Cloneable {
 	
 	public int customHashCode() {
 		return Objects.hash(autobusConAlas.getOrigen().corto, autobusConAlas.getLlegada().corto);
->>>>>>> branch 'master' of https://github.com/askiji/Aerolinea.git
 	}
 	private String getMitad() {
 		String aux = autobusConAlas.getOrigen().corto+""+autobusConAlas.getLlegada().corto;

@@ -14,17 +14,12 @@ public class AgenciaAerea {
 	private static ArrayList<Ciudades> city = new ArrayList<>();
 	private ArrayList<Vuelo> vuelosDia = new ArrayList<>();
 	private DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
-<<<<<<< HEAD
-//	public static HashMap<Vuelo , Integer> tiempoDeVuelo= new HashMap<>();
-	private LocalDate ldt = LocalDate.now();
-=======
 	public static HashSet<Vuelo> tiempoDeVuelo= new HashSet<Vuelo>();
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm");
 	private ArrayList<Vuelo> allFlights = new ArrayList<>();
 	private ArrayList<String> chorizo = new ArrayList<String>();
 	private HashMap<Integer , LocalTime> duraciones = new HashMap<>();
 	private LocalDate ldt;
->>>>>>> branch 'master' of https://github.com/askiji/Aerolinea.git
 	
 
 	public void init() {
@@ -44,18 +39,17 @@ public class AgenciaAerea {
 	public void info() {
 		System.out.println(ldt.format(formatters));
 		System.out.println("1.- Listado de vuelos totales");
-		System.out.println("2.- pàsar dia siguente y ver vuelos");
+		System.out.println("2.- pasar dia siguente y ver vuelos");
 		System.out.println("3.- terminar el programa");
 		Scanner sc = new Scanner(System.in);
 		int opcion = sc.nextInt();
 		switch (opcion) {
 		case 1:
-			System.out.println("to do");
 			acumulados();
 			break;
 		case 2:
+			chorizo.add("Vuelos del dia "+ldt.format(formatters));
 			ldt=ldt.plusDays(1);
-//			ldt.plusDay(1);
 			llenarCiudades();
 			buscarDestino();
 			generarVuelo();
@@ -108,6 +102,9 @@ public class AgenciaAerea {
 				System.out.println(frase+ " : "+ vueloDia.getAutobusConAlas().getOrigen().nombre+" - "+vueloDia.getAutobusConAlas().getLlegada().nombre);
 				int aux = sc.nextInt();
 				LocalTime cero = LocalTime.of(0, 0);
+				if(aux>300) {
+					aux=300;
+				}
 				cero = cero.plusMinutes(aux);
 				duraciones.put(vueloDia.customHashCode(), cero);
 				vueloDia.setLlegada(vueloDia.salida.plusMinutes(aux));
@@ -115,12 +112,15 @@ public class AgenciaAerea {
 				if(vueloDia.getLlegada().isBefore(siete)) {
 					System.out.println("Del dia siguente");
 				}
-				System.out.println("salida "+ vueloDia.autobusConAlas.getOrigen());
-				System.out.println("llegada "+ vueloDia.autobusConAlas.getLlegada());
-//				
-//				vueloDia.autobusConAlas.setLlegada(vueloDia.autobusConAlas.getLlegada());
+
 			}
+			if(vueloDia.getLlegada().isBefore(siete)) {
+				chorizo.add(vueloDia.getCode()+ " " +vueloDia.autobusConAlas.getOrigen().nombre+"-"+vueloDia.autobusConAlas.getLlegada().nombre+"\t \t" +vueloDia.getSalida()+ "\t"+vueloDia.getLlegada() + " del dia siguente");
+			}
+			else {
+				
 				chorizo.add(vueloDia.getCode()+ " " +vueloDia.autobusConAlas.getOrigen().nombre+"-"+vueloDia.autobusConAlas.getLlegada().nombre+"\t \t" +vueloDia.getSalida()+ "\t"+vueloDia.getLlegada());
+			}
 				allFlights.add(vueloDia);
 
 		}
@@ -170,18 +170,13 @@ public class AgenciaAerea {
 			vuelosDia.add(v);
 			tiempoDeVuelo.add(v);
 			
-<<<<<<< HEAD
-			
-			
-=======
->>>>>>> branch 'master' of https://github.com/askiji/Aerolinea.git
 
 		}
 	}
 	
 	public LocalTime horaSalida() {
 		Random r = new Random();
-		int hora = r.nextInt(16)+7;
+		int hora = r.nextInt(17)+7;
 		int minutos = r.nextInt(12)*5;
 		LocalTime lt=LocalTime.of(hora, minutos);
 		return lt;
@@ -196,13 +191,5 @@ public class AgenciaAerea {
 		}
 	}
 	
-//	public void horaLlegada() {
-//		Scanner sc = new Scanner(System.in);
-//		for (Vuelo v : vuelosDia) {
-//			if (AgenciaAerea.tiempoDeVuelo.containsKey(v.hashCode())) {
-//				System.out.println("horallegada");
-//			}
-//		}
-//	}
 	
 }
